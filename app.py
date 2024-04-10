@@ -154,7 +154,7 @@ class TodoListWidget(QWidget):
         if self.todo_list.count() == 0:
             QMessageBox.warning(self, "Error", "You have no item in your list")
         else:
-            filename, _ = QFileDialog.getSaveFileName(self, "Export Todos", "", "CSV Files (*.Csv)")
+            filename, _ = QFileDialog.getSaveFileName(self, "Export Todos", "", "CSV Files (*.csv)")
             if filename:
                 tasks = []
                 for index in range (self.todo_list.count()):
