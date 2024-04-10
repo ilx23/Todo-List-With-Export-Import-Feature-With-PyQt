@@ -159,16 +159,31 @@ class TodoListWidget(QWidget):
                 tasks = []
                 for index in range (self.todo_list.count()):
                     item = self.todo_list.item(index)
-                    if item.background().color().name() == "#000000":
+                    if item.background().color().name() == "#000000":  # Check if the item has not changed
                         tasks.append({
                             'Task': item.text(),
-                            'Color': "#ffffff"
+                            'Color': "#ffffff",
+                            'Status': "Not Change"
                         })
                     else:
-                        tasks.append({
-                            'Task': item.text(),
-                            'Color': item.background().color().name()
-                        })
+                        if item.background().color().name() == '#8bc34a':  # Check if the item is done
+                            tasks.append({
+                                'Task': item.text(),
+                                'Color': item.background().color().name(),
+                                'Status': "Done"
+                            })
+                        elif item.background().color().name() == "#d32f2f":  # Check if the item is in progress
+                            tasks.append({
+                                'Task': item.text(),
+                                'Color': item.background().color().name(),
+                                'Status': "In Progress"
+                            })
+                        else:  # The item Has not done
+                            tasks.append({
+                                'Task': item.text(),
+                                'Color': item.background().color().name(),
+                                'Status': "Not Done"
+                            })
                 df = pd.DataFrame(tasks)
                 df.to_csv(filename, index=False)
 
